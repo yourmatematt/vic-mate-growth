@@ -2,87 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Your Mate Agency Design System - Australian Digital Marketing */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Brand Colors - Australian Digital Marketing Theme */
+    --background: 0 0% 98%;
+    --foreground: 210 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Trustworthy Blue #0066CC */
+    --primary: 213 100% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 213 100% 35%;
+    --primary-light: 213 100% 90%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Growth Green #00A651 */
+    --secondary: 140 100% 33%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 140 100% 28%;
+    --secondary-light: 140 100% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Optimistic Gold #FFB800 */
+    --accent: 45 100% 50%;
+    --accent-foreground: 210 20% 15%;
+    --accent-hover: 45 100% 45%;
+    --accent-light: 45 100% 90%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 213 100% 40%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Australian Business Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-cta: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-hover)));
+    --gradient-card: linear-gradient(180deg, hsl(var(--card)), hsl(var(--muted)));
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Shadows for Cards */
+    --shadow-card: 0 2px 8px -2px hsl(var(--primary) / 0.1);
+    --shadow-hover: 0 8px 25px -8px hsl(var(--primary) / 0.25);
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Spacing Grid - 8px base */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2rem;     /* 32px */
+    --space-xl: 3rem;     /* 48px */
+    --space-2xl: 4rem;    /* 64px */
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -91,7 +83,6 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
 
 @layer base {
@@ -100,6 +91,126 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  /* Australian Business Card Styles */
+  .mate-card {
+    @apply bg-card rounded-lg border border-border shadow-[var(--shadow-card)] 
+           transition-all duration-300 hover:shadow-[var(--shadow-hover)] hover:-translate-y-1;
+  }
+
+  /* Hero Gradient Backgrounds */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .cta-gradient {
+    background: var(--gradient-cta);
+  }
+
+  /* Town Pills for Regional Coverage */
+  .town-pill {
+    @apply inline-flex items-center px-4 py-2 rounded-full border border-primary/20 
+           bg-primary-light text-primary font-medium text-sm 
+           hover:bg-primary hover:text-primary-foreground 
+           transition-all duration-300 hover:scale-105 cursor-pointer;
+  }
+
+  /* Metric Cards */
+  .metric-card {
+    @apply bg-gradient-to-br from-card via-card to-muted/50 
+           rounded-lg p-6 border border-border 
+           shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)]
+           transition-all duration-300;
+  }
+
+  /* Interactive Elements */
+  .mate-button-primary {
+    @apply bg-primary hover:bg-primary-hover text-primary-foreground 
+           px-6 py-3 rounded-lg font-medium
+           transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .mate-button-secondary {
+    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground 
+           px-6 py-3 rounded-lg font-medium
+           transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .mate-button-accent {
+    @apply bg-gradient-to-r from-accent to-accent-hover text-accent-foreground 
+           px-6 py-3 rounded-lg font-medium
+           transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* Form Styles */
+  .mate-input {
+    @apply w-full px-4 py-3 rounded-lg border border-input bg-card text-foreground
+           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+           placeholder:text-muted-foreground;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply text-foreground hover:text-primary font-medium 
+           transition-colors duration-300 relative;
+  }
+
+  .nav-link-active {
+    @apply text-primary font-semibold;
+  }
+
+  /* Floating CTA */
+  .floating-cta {
+    @apply fixed bottom-6 right-6 z-50 bg-accent hover:bg-accent-hover 
+           text-accent-foreground px-6 py-3 rounded-full font-semibold
+           shadow-lg hover:shadow-xl transition-all duration-300 
+           hover:-translate-y-1;
+  }
+}
+
+/* Australian-specific animations */
+@keyframes mate-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .animate-mate-bounce {
+    animation: mate-bounce 1.5s infinite;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
   }
 }
