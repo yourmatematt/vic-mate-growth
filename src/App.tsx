@@ -12,6 +12,12 @@ import Learn from "./pages/Learn";
 import About from "./pages/About";
 import LocationPage from "./pages/LocationPage";
 import NotFound from "./pages/NotFound";
+import WebsiteDesignDevelopment from "./pages/services/WebsiteDesignDevelopment";
+import SEOLocalSearch from "./pages/services/SEOLocalSearch";
+import GoogleAdsManagement from "./pages/services/GoogleAdsManagement";
+import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
+import EmailMarketing from "./pages/services/EmailMarketing";
+import ContentCreation from "./pages/services/ContentCreation";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +37,12 @@ const App = () => (
               <Route path="/learn" element={<Learn />} />
               <Route path="/about" element={<About />} />
               <Route path="/locations/:location" element={<LocationPage />} />
+              <Route path="/grow-my-business/website-design-development" element={<WebsiteDesignDevelopment />} />
+              <Route path="/grow-my-business/seo-local-search" element={<SEOLocalSearch />} />
+              <Route path="/grow-my-business/google-ads-management" element={<GoogleAdsManagement />} />
+              <Route path="/grow-my-business/social-media-marketing" element={<SocialMediaMarketing />} />
+              <Route path="/grow-my-business/email-marketing" element={<EmailMarketing />} />
+              <Route path="/grow-my-business/content-creation" element={<ContentCreation />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
