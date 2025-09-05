@@ -9,10 +9,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { newsletterSchema, type NewsletterFormData } from '@/lib/validationSchemas';
+import SEOChecklistTool from '@/components/tools/SEOChecklistTool';
+import ROICalculator from '@/components/tools/ROICalculator';
+import WebsiteSpeedTracker from '@/components/tools/WebsiteSpeedTracker';
 
 const Learn = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
   const {
     register,
@@ -150,6 +154,19 @@ const Learn = () => {
       console.error('Error submitting newsletter:', error);
     }
   };
+
+  // Show selected tool
+  if (selectedTool) {
+    return (
+      <div className="min-h-screen pt-16">
+        <div className="container mx-auto px-4 py-8">
+          {selectedTool === 'seo-checklist' && <SEOChecklistTool />}
+          {selectedTool === 'roi-calculator' && <ROICalculator />}
+          {selectedTool === 'speed-tester' && <WebsiteSpeedTracker />}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-16">
@@ -338,7 +355,10 @@ const Learn = () => {
                     {tool.description}
                   </p>
                   
-                  <Button className="mate-button-primary">
+                  <Button 
+                    className="mate-button-primary"
+                    onClick={() => setSelectedTool(tool.id)}
+                  >
                     Try It Free
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
