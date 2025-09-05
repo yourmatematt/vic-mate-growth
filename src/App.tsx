@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import GrowMyBusiness from "./pages/GrowMyBusiness";
 import Expertise from "./pages/Expertise";
 import Learn from "./pages/Learn";
@@ -35,6 +36,7 @@ const App = () => (
             </Routes>
           </main>
           <Footer />
+          <ScrollToTop />
         </div>
       </BrowserRouter>
     </TooltipProvider>

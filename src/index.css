@@ -175,6 +175,13 @@
            shadow-lg hover:shadow-xl transition-all duration-300 
            hover:-translate-y-1;
   }
+
+  /* Scroll to Top Button */
+  .scroll-to-top-btn {
+    @apply bg-primary hover:bg-primary-hover text-primary-foreground 
+           rounded-full shadow-lg hover:shadow-xl 
+           transition-all duration-300 hover:-translate-y-1 hover:scale-110;
+  }
 }
 
 /* Australian-specific animations */
