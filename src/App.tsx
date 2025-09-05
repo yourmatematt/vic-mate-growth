@@ -18,6 +18,7 @@ import GoogleAdsManagement from "./pages/services/GoogleAdsManagement";
 import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
 import EmailMarketing from "./pages/services/EmailMarketing";
 import ContentCreation from "./pages/services/ContentCreation";
+import WhyWebsiteNotFound from "./pages/blog/WhyWebsiteNotFound";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/grow-my-business/social-media-marketing" element={<SocialMediaMarketing />} />
               <Route path="/grow-my-business/email-marketing" element={<EmailMarketing />} />
               <Route path="/grow-my-business/content-creation" element={<ContentCreation />} />
+              <Route path="/blog/why-website-not-found" element={<WhyWebsiteNotFound />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
