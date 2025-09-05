@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import SocialProofBanner from "./components/SocialProofBanner";
 import GrowMyBusiness from "./pages/GrowMyBusiness";
 import Expertise from "./pages/Expertise";
 import Learn from "./pages/Learn";
@@ -55,6 +56,7 @@ const App = () => (
           </main>
           <Footer />
           <ScrollToTop />
+          <SocialProofBanner />
         </div>
       </BrowserRouter>
       </TooltipProvider>
