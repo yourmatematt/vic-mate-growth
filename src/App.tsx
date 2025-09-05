@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -19,15 +20,17 @@ import SocialMediaMarketing from "./pages/services/SocialMediaMarketing";
 import EmailMarketing from "./pages/services/EmailMarketing";
 import ContentCreation from "./pages/services/ContentCreation";
 import WhyWebsiteNotFound from "./pages/blog/WhyWebsiteNotFound";
+import ClientProjectShowcase from "./pages/portfolio/ClientProjectShowcase";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+    <HelmetProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           <Navigation />
           <main className="flex-1">
@@ -45,6 +48,7 @@ const App = () => (
               <Route path="/grow-my-business/email-marketing" element={<EmailMarketing />} />
               <Route path="/grow-my-business/content-creation" element={<ContentCreation />} />
               <Route path="/blog/why-website-not-found" element={<WhyWebsiteNotFound />} />
+              <Route path="/portfolio/techflow-solutions" element={<ClientProjectShowcase />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -53,7 +57,8 @@ const App = () => (
           <ScrollToTop />
         </div>
       </BrowserRouter>
-    </TooltipProvider>
+      </TooltipProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 
