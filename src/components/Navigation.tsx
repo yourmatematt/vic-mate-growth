@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LayoutDashboard, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +63,23 @@ const Navigation = () => {
                 {link.name}
               </Link>
             ))}
-            
+
+            {isAuthenticated ? (
+              <Link to="/dashboard">
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <LayoutDashboard className="w-4 h-4" />
+                  <span>Dashboard</span>
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <LogIn className="w-4 h-4" />
+                  <span>Client Login</span>
+                </Button>
+              </Link>
+            )}
+
             <Button className="mate-button-accent">
               Get Your Free Website Analysis
             </Button>
@@ -96,8 +114,24 @@ const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
-              
-              <Button 
+
+              {isAuthenticated ? (
+                <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full flex items-center justify-center space-x-2">
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Dashboard</span>
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full flex items-center justify-center space-x-2">
+                    <LogIn className="w-4 h-4" />
+                    <span>Client Login</span>
+                  </Button>
+                </Link>
+              )}
+
+              <Button
                 className="w-full mate-button-accent mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
