@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import SocialProofBanner from "./components/SocialProofBanner";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 import DashboardLayout from "./components/DashboardLayout";
 import GrowMyBusiness from "./pages/GrowMyBusiness";
 import Expertise from "./pages/Expertise";
@@ -33,10 +34,12 @@ import Reports from "./pages/dashboard/Reports";
 import Invoices from "./pages/dashboard/Invoices";
 import Settings from "./pages/dashboard/Settings";
 import Support from "./pages/dashboard/Support";
+import MyTools from "./pages/dashboard/MyTools";
 import Tools from "./pages/Tools";
 import BreakEvenCalculator from "./pages/tools/BreakEvenCalculator";
 import SubjectLineScorer from "./pages/tools/SubjectLineScorer";
 import MarketingAssessment from "./pages/tools/MarketingAssessment";
+import BudgetAllocator from "./pages/tools/BudgetAllocator";
 
 const queryClient = new QueryClient();
 
@@ -220,6 +223,7 @@ const App = () => (
               <Route path="/tools/break-even-calculator" element={<BreakEvenCalculator />} />
               <Route path="/tools/subject-line-scorer" element={<SubjectLineScorer />} />
               <Route path="/tools/marketing-assessment" element={<MarketingAssessment />} />
+              <Route path="/tools/budget-allocator" element={<BudgetAllocator />} />
 
               {/* Auth Routes */}
               <Route path="/login" element={<Login />} />
@@ -234,6 +238,7 @@ const App = () => (
                 <Route index element={<Overview />} />
                 <Route path="campaigns" element={<Campaigns />} />
                 <Route path="reports" element={<Reports />} />
+                <Route path="my-tools" element={<MyTools />} />
                 <Route path="invoices" element={<Invoices />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="support" element={<Support />} />
@@ -242,6 +247,7 @@ const App = () => (
               {/* 404 - ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <ExitIntentPopup enabled={true} />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>

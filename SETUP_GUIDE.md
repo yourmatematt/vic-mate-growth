@@ -7,10 +7,13 @@ This document outlines all third-party services that need to be set up to make t
 ## 📋 **CURRENT STATUS**
 
 ✅ **What's Built & Working:**
-- All 3 interactive tools (Break-Even Calculator, Subject Line Scorer, Marketing Assessment)
+- 4 interactive tools (Break-Even Calculator, Subject Line Scorer, Marketing Assessment, Budget Allocator)
 - Tools hub landing page with search/filter
 - Lead capture modals with conversion optimization
-- Client dashboard with 6 pages
+- Exit-intent popup for capturing leaving visitors
+- Client dashboard with 7 pages (Overview, Campaigns, Reports, My Tools, Invoices, Settings, Support)
+- My Tools dashboard page for viewing tool usage history
+- Navigation CTA button wired to Website Analysis modal
 - Mock data for demonstrations
 - Form validation with Zod schemas
 - localStorage for temporary result storage
@@ -157,7 +160,9 @@ Replace console.log statements in these files:
 - `src/pages/tools/BreakEvenCalculator.tsx`
 - `src/pages/tools/SubjectLineScorer.tsx`
 - `src/pages/tools/MarketingAssessment.tsx`
+- `src/pages/tools/BudgetAllocator.tsx`
 - `src/components/WebsiteAnalysisCTA.tsx`
+- `src/components/ExitIntentPopup.tsx`
 
 Example replacement:
 ```typescript

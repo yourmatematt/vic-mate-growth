@@ -3,10 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, LayoutDashboard, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import WebsiteAnalysisCTA from './WebsiteAnalysisCTA';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showAnalysisCTA, setShowAnalysisCTA] = useState(false);
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
@@ -81,7 +83,10 @@ const Navigation = () => {
               </Link>
             )}
 
-            <Button className="mate-button-accent">
+            <Button
+              className="mate-button-accent"
+              onClick={() => setShowAnalysisCTA(true)}
+            >
               Get Your Free Website Analysis
             </Button>
           </div>
@@ -134,7 +139,10 @@ const Navigation = () => {
 
               <Button
                 className="w-full mate-button-accent mt-4"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setShowAnalysisCTA(true);
+                }}
               >
                 Get Your Free Website Analysis
               </Button>
@@ -142,6 +150,13 @@ const Navigation = () => {
           </div>
         )}
       </div>
+
+      {/* Website Analysis Modal */}
+      <WebsiteAnalysisCTA
+        isOpen={showAnalysisCTA}
+        onClose={() => setShowAnalysisCTA(false)}
+        sourcePage={location.pathname}
+      />
     </nav>
   );
 };
