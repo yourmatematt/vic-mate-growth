@@ -21,6 +21,7 @@ const Navigation = () => {
   const navLinks = [
     { name: 'Grow My Business', path: '/grow-my-business' },
     { name: 'See Our Expertise', path: '/expertise' },
+    { name: 'Free Tools', path: '/tools' },
     { name: 'Learn Digital Marketing', path: '/learn' },
     { name: 'About Us', path: '/about' }
   ];

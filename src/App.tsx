@@ -33,6 +33,10 @@ import Reports from "./pages/dashboard/Reports";
 import Invoices from "./pages/dashboard/Invoices";
 import Settings from "./pages/dashboard/Settings";
 import Support from "./pages/dashboard/Support";
+import Tools from "./pages/Tools";
+import BreakEvenCalculator from "./pages/tools/BreakEvenCalculator";
+import SubjectLineScorer from "./pages/tools/SubjectLineScorer";
+import MarketingAssessment from "./pages/tools/MarketingAssessment";
 
 const queryClient = new QueryClient();
 
@@ -200,6 +204,22 @@ const App = () => (
                   <SocialProofBanner />
                 </div>
               } />
+
+              {/* Tools Routes */}
+              <Route path="/tools" element={
+                <div className="min-h-screen flex flex-col">
+                  <Navigation />
+                  <main className="flex-1">
+                    <Tools />
+                  </main>
+                  <Footer />
+                  <ScrollToTop />
+                  <SocialProofBanner />
+                </div>
+              } />
+              <Route path="/tools/break-even-calculator" element={<BreakEvenCalculator />} />
+              <Route path="/tools/subject-line-scorer" element={<SubjectLineScorer />} />
+              <Route path="/tools/marketing-assessment" element={<MarketingAssessment />} />
 
               {/* Auth Routes */}
               <Route path="/login" element={<Login />} />
