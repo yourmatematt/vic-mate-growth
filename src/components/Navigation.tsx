@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LayoutDashboard, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
+import WebsiteAnalysisCTA from './WebsiteAnalysisCTA';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showAnalysisCTA, setShowAnalysisCTA] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +23,7 @@ const Navigation = () => {
   const navLinks = [
     { name: 'Grow My Business', path: '/grow-my-business' },
     { name: 'See Our Expertise', path: '/expertise' },
+    { name: 'Free Tools', path: '/tools' },
     { name: 'Learn Digital Marketing', path: '/learn' },
     { name: 'About Us', path: '/about' }
   ];
@@ -61,8 +66,27 @@ const Navigation = () => {
                 {link.name}
               </Link>
             ))}
-            
-            <Button className="mate-button-accent">
+
+            {isAuthenticated ? (
+              <Link to="/dashboard">
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <LayoutDashboard className="w-4 h-4" />
+                  <span>Dashboard</span>
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <LogIn className="w-4 h-4" />
+                  <span>Client Login</span>
+                </Button>
+              </Link>
+            )}
+
+            <Button
+              className="mate-button-accent"
+              onClick={() => setShowAnalysisCTA(true)}
+            >
               Get Your Free Website Analysis
             </Button>
           </div>
@@ -96,10 +120,29 @@ const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
-              
-              <Button 
+
+              {isAuthenticated ? (
+                <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full flex items-center justify-center space-x-2">
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Dashboard</span>
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full flex items-center justify-center space-x-2">
+                    <LogIn className="w-4 h-4" />
+                    <span>Client Login</span>
+                  </Button>
+                </Link>
+              )}
+
+              <Button
                 className="w-full mate-button-accent mt-4"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setShowAnalysisCTA(true);
+                }}
               >
                 Get Your Free Website Analysis
               </Button>
@@ -107,6 +150,13 @@ const Navigation = () => {
           </div>
         )}
       </div>
+
+      {/* Website Analysis Modal */}
+      <WebsiteAnalysisCTA
+        isOpen={showAnalysisCTA}
+        onClose={() => setShowAnalysisCTA(false)}
+        sourcePage={location.pathname}
+      />
     </nav>
   );
 };
