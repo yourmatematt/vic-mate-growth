@@ -55,6 +55,7 @@ import BookingDetail from "./pages/admin/BookingDetail";
 import TimeSlots from "./pages/admin/TimeSlots";
 import BlackoutDates from "./pages/admin/BlackoutDates";
 import BookStrategyCall from "./pages/BookStrategyCall";
+import GoogleCalendarAuth from "./pages/admin/GoogleCalendarAuth";
 
 const queryClient = new QueryClient();
 
@@ -338,6 +339,11 @@ const App = () => (
               <Route path="/admin/blackout-dates" element={
                 <AdminProtectedRoute>
                   <BlackoutDates />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/google-calendar-auth" element={
+                <AdminProtectedRoute>
+                  <GoogleCalendarAuth />
                 </AdminProtectedRoute>
               } />
 
