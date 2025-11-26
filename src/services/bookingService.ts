@@ -205,17 +205,26 @@ export const getAvailableSlots = async (
   endDate: string
 ): Promise<AvailableSlot[]> => {
   try {
+    console.log('bookingService: Fetching available slots for', startDate, 'to', endDate);
     const { data, error } = await supabase.rpc('get_available_slots', {
       date_start: startDate,
       date_end: endDate,
     });
 
+    console.log('bookingService: get_available_slots result:', { data, error, count: data?.length });
+
     if (error) {
+      console.error('bookingService: RPC error:', error);
       handleSupabaseError(error, 'getAvailableSlots');
+    }
+
+    if (!data || data.length === 0) {
+      console.warn('bookingService: No slots returned from database. Check if get_available_slots function exists and available_time_slots table has data.');
     }
 
     return data || [];
   } catch (error) {
+    console.error('bookingService: getAvailableSlots exception:', error);
     if (error instanceof BookingServiceError) {
       throw error;
     }

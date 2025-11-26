@@ -60,15 +60,24 @@ export const formatTimeSlot = (startTime: string, endTime: string): string => {
   if (!startTime || !endTime) return '';
 
   try {
-    // Create date objects for time formatting
-    const startDate = new Date(`1970-01-01T${startTime}:00`);
-    const endDate = new Date(`1970-01-01T${endTime}:00`);
+    const normalizeTime = (time: string): string => {
+      const parts = time.split(':');
+      if (parts.length === 2) return `${time}:00`;
+      return time;
+    };
+
+    const startDate = new Date(`1970-01-01T${normalizeTime(startTime)}`);
+    const endDate = new Date(`1970-01-01T${normalizeTime(endTime)}`);
+
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.warn('Invalid time format:', { startTime, endTime });
+      return `${startTime} - ${endTime}`;
+    }
 
     const timeFormat: Intl.DateTimeFormatOptions = {
       hour: 'numeric',
       minute: '2-digit',
       hour12: true,
-      timeZone: 'Australia/Melbourne'
     };
 
     const formattedStart = startDate.toLocaleTimeString('en-AU', timeFormat);
@@ -321,7 +330,10 @@ export const convertTo12Hour = (time24h: string): string => {
   if (!time24h) return '';
 
   try {
-    const date = new Date(`1970-01-01T${time24h}:00`);
+    const parts = time24h.split(':');
+    const normalizedTime = parts.length === 2 ? `${time24h}:00` : time24h;
+    const date = new Date(`1970-01-01T${normalizedTime}`);
+    if (isNaN(date.getTime())) return time24h;
     return date.toLocaleTimeString('en-AU', {
       hour: 'numeric',
       minute: '2-digit',

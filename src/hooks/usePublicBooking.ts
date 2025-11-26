@@ -152,7 +152,9 @@ export const useAvailableSlots = (
   const [error, setError] = useState<string | null>(null);
 
   const fetchSlots = useCallback(async () => {
+    console.log('useAvailableSlots: fetchSlots called with', { startDate, endDate });
     if (!startDate || !endDate) {
+      console.log('useAvailableSlots: Missing dates, returning empty');
       setSlots([]);
       return;
     }
@@ -162,6 +164,7 @@ export const useAvailableSlots = (
       setError(null);
 
       const data = await getAvailableSlots(startDate, endDate);
+      console.log('useAvailableSlots: Received slots:', data?.length, 'slots');
       setSlots(data);
     } catch (err) {
       const errorMessage = err instanceof BookingServiceError
@@ -169,7 +172,7 @@ export const useAvailableSlots = (
         : 'Failed to load available time slots';
       setError(errorMessage);
       setSlots([]);
-      console.error('Error fetching available slots:', err);
+      console.error('useAvailableSlots: Error fetching slots:', err);
     } finally {
       setLoading(false);
     }
