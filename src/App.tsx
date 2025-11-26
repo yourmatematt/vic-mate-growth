@@ -346,6 +346,11 @@ const App = () => (
                   <GoogleCalendarAuth />
                 </AdminProtectedRoute>
               } />
+              <Route path="/admin/google-calendar-auth/callback" element={
+                <AdminProtectedRoute>
+                  <GoogleCalendarAuth />
+                </AdminProtectedRoute>
+              } />
 
               {/* 404 - ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
