@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Menu,
@@ -23,6 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { getCurrentUser, signOut, UserWithProfile } from '@/lib/auth-utils';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -37,15 +38,18 @@ interface NavigationItem {
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState<UserWithProfile | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Mock user data - replace with actual auth context
-  const user = {
-    name: 'Admin User',
-    email: 'admin@yourmate.com.au',
-    role: 'Admin'
-  };
+  // Get current user on mount
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
+    fetchUser();
+  }, []);
 
   const navigation: NavigationItem[] = [
     {
@@ -138,10 +142,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const breadcrumbs = generateBreadcrumbs();
 
-  const handleLogout = () => {
-    // TODO: Implement logout logic
-    console.log('Logging out...');
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      // Still navigate home even if logout fails
+      navigate('/');
+    }
   };
 
   const Sidebar = ({ mobile = false }) => (
@@ -277,20 +286,20 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="text-sm font-medium text-foreground hidden sm:block">
-                      {user.name}
+                      {user?.email?.split('@')[0] || 'Admin User'}
                     </span>
                     <Badge variant="secondary" className="text-xs hidden sm:inline-flex">
-                      {user.role}
+                      {user?.role === 'admin' ? 'Administrator' : 'User'}
                     </Badge>
                   </div>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="flex flex-col space-y-1 p-2">
-                  <p className="text-sm font-medium">{user.name}</p>
-                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                  <p className="text-sm font-medium">{user?.email?.split('@')[0] || 'Admin User'}</p>
+                  <p className="text-xs text-muted-foreground">{user?.email || ''}</p>
                   <Badge variant="secondary" className="w-fit">
-                    {user.role}
+                    {user?.role === 'admin' ? 'Administrator' : 'User'}
                   </Badge>
                 </div>
                 <Separator />

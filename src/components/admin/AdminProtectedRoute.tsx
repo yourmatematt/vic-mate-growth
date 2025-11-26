@@ -1,56 +1,57 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+import { getCurrentUser, onAuthStateChange, UserWithProfile } from '@/lib/auth-utils';
 
 interface AdminProtectedRouteProps {
   children: React.ReactNode;
 }
 
-interface AuthUser {
-  id: string;
-  email: string;
-  role?: string;
-  isAuthenticated: boolean;
-}
-
-interface AuthState {
-  user: AuthUser | null;
-  loading: boolean;
-}
-
 const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) => {
-  // TODO: Replace with actual AuthContext hook
-  // This is a mock implementation - replace with your actual auth system
-
-  // Simulate loading state - moved hooks to top level
+  const [user, setUser] = React.useState<UserWithProfile | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const [authError, setAuthError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    // Simulate auth check
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    let mounted = true;
 
-    return () => clearTimeout(timer);
+    // Initial auth check
+    const checkAuth = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        if (mounted) {
+          setUser(currentUser);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+        if (mounted) {
+          setAuthError('Failed to check authentication');
+          setLoading(false);
+        }
+      }
+    };
+
+    // Listen for auth state changes
+    const { data: authListener } = onAuthStateChange((user) => {
+      if (mounted) {
+        setUser(user);
+        setLoading(false);
+      }
+    });
+
+    checkAuth();
+
+    return () => {
+      mounted = false;
+      if (authListener?.subscription) {
+        authListener.subscription.unsubscribe();
+      }
+    };
   }, []);
 
-  // Mock auth state - replace this with actual auth context
-  const authState: AuthState = React.useMemo(() => {
-    const mockUser: AuthUser = {
-      id: 'admin-1',
-      email: 'admin@yourmate.com.au',
-      role: 'admin',
-      isAuthenticated: true
-    };
-
-    return {
-      user: mockUser,
-      loading
-    };
-  }, [loading]);
-
   // Show loading spinner while checking authentication
-  if (authState.loading) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center space-y-4">
@@ -61,19 +62,26 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
     );
   }
 
+  // Show error if auth check failed
+  if (authError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4">
+          <p className="text-muted-foreground">Authentication error. Please try refreshing the page.</p>
+        </div>
+      </div>
+    );
+  }
+
   // Redirect to login if not authenticated
-  if (!authState.user || !authState.user.isAuthenticated) {
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
   // Check if user has admin role
-  // For now, we'll just check if authenticated (as requested)
-  // In the future, uncomment the role check below
-  /*
-  if (authState.user.role !== 'admin') {
+  if (!user.isAdmin) {
     return <Navigate to="/admin/unauthorized" replace />;
   }
-  */
 
   // User is authenticated and authorized - render children
   return <>{children}</>;
