@@ -1,5 +1,4 @@
 {
-  "framework": "vite",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "regions": ["syd1"],
@@ -40,10 +39,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "src/pages/**/*.{ts,tsx}": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
