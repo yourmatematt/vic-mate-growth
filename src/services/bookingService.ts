@@ -85,25 +85,25 @@ const handleSupabaseError = (error: any, operation: string): never => {
  */
 export const createBooking = async (data: BookingFormData): Promise<Booking> => {
   try {
-    // 1. Create booking in database
+    console.log('bookingService: Creating booking with data:', data);
+
     const bookingData = {
       customer_name: data.customer_name,
       customer_email: data.customer_email,
       customer_phone: data.customer_phone,
       business_name: data.business_name,
       business_type: data.business_type,
-      business_location: data.business_location,
-      business_website: data.business_website,
-      current_revenue: data.current_revenue,
-      current_marketing: data.current_marketing,
-      primary_goals: data.primary_goals,
-      marketing_budget: data.marketing_budget,
+      business_location: data.business_location || null,
+      current_marketing: data.current_marketing || [],
       biggest_challenge: data.biggest_challenge,
-      datetime: data.datetime,
+      monthly_revenue_range: data.monthly_revenue_range || null,
+      preferred_date: data.preferred_date,
+      preferred_time_slot: data.preferred_time_slot,
       additional_notes: data.additional_notes || null,
       status: 'pending' as const,
-      calendar_sync_status: 'pending' as const,
     };
+
+    console.log('bookingService: Mapped booking data:', bookingData);
 
     const { data: booking, error } = await supabase
       .from('bookings')
