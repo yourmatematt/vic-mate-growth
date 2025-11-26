@@ -48,13 +48,29 @@ export async function getCurrentUser(): Promise<UserWithProfile | null> {
 async function getUserWithProfile(user: { id: string; email?: string }): Promise<UserWithProfile | null> {
   try {
     console.log('auth-utils: Fetching user profile for:', user.id);
-    const { data: profile, error: profileError } = await supabase
+
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('Profile query timeout after 5s')), 5000)
+    );
+
+    const queryPromise = supabase
       .from('user_profiles')
       .select('role')
       .eq('id', user.id)
       .maybeSingle();
 
-    console.log('auth-utils: User profile query result:', { profile, error: profileError });
+    let profile = null;
+    let profileError = null;
+
+    try {
+      const result = await Promise.race([queryPromise, timeoutPromise]);
+      profile = result.data;
+      profileError = result.error;
+      console.log('auth-utils: User profile query result:', { profile, error: profileError });
+    } catch (timeoutErr) {
+      console.warn('auth-utils: Profile query timed out, using fallback');
+      profileError = timeoutErr;
+    }
 
     if (profileError) {
       console.error('auth-utils: Error fetching user profile:', profileError);
@@ -71,7 +87,12 @@ async function getUserWithProfile(user: { id: string; email?: string }): Promise
     return result;
   } catch (error) {
     console.error('auth-utils: Error getting user profile:', error);
-    return null;
+    return {
+      id: user.id,
+      email: user.email || '',
+      role: 'user',
+      isAdmin: false
+    };
   }
 }
 

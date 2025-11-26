@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
-import { getCurrentUser, onAuthStateChange, UserWithProfile } from '@/lib/auth-utils';
+import { getCurrentUser, UserWithProfile } from '@/lib/auth-utils';
+import { supabase } from '@/lib/supabase';
 import AdminLogin from '@/pages/admin/AdminLogin';
 
 interface AdminProtectedRouteProps {
@@ -12,47 +13,51 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
   const [user, setUser] = React.useState<UserWithProfile | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [authError, setAuthError] = React.useState<string | null>(null);
+  const initialCheckDone = React.useRef(false);
 
   React.useEffect(() => {
     let mounted = true;
 
-    // Initial auth check
     const checkAuth = async () => {
       try {
-        console.log('AdminProtectedRoute: Starting auth check...');
+        console.log('AdminProtectedRoute: Starting initial auth check...');
         const currentUser = await getCurrentUser();
         console.log('AdminProtectedRoute: getCurrentUser result:', currentUser);
         if (mounted) {
           setUser(currentUser);
           setLoading(false);
-          console.log('AdminProtectedRoute: Set user and loading=false');
+          initialCheckDone.current = true;
+          console.log('AdminProtectedRoute: Initial check complete');
         }
       } catch (error) {
         console.error('AdminProtectedRoute: Auth check error:', error);
         if (mounted) {
           setAuthError('Failed to check authentication');
           setLoading(false);
+          initialCheckDone.current = true;
         }
       }
     };
 
-    // Listen for auth state changes
-    const { data: authListener } = onAuthStateChange((user) => {
-      console.log('AdminProtectedRoute: Auth state changed:', user);
-      if (mounted) {
-        setUser(user);
-        setLoading(false);
-        console.log('AdminProtectedRoute: Updated user from auth state change');
+    checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('AdminProtectedRoute: Auth event:', event);
+      if (!mounted) return;
+
+      if (event === 'SIGNED_OUT') {
+        setUser(null);
+      } else if (event === 'SIGNED_IN' && initialCheckDone.current) {
+        const currentUser = await getCurrentUser();
+        if (mounted) {
+          setUser(currentUser);
+        }
       }
     });
 
-    checkAuth();
-
     return () => {
       mounted = false;
-      if (authListener?.subscription) {
-        authListener.subscription.unsubscribe();
-      }
+      subscription.unsubscribe();
     };
   }, []);
 
