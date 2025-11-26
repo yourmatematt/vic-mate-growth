@@ -19,13 +19,16 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
     // Initial auth check
     const checkAuth = async () => {
       try {
+        console.log('AdminProtectedRoute: Starting auth check...');
         const currentUser = await getCurrentUser();
+        console.log('AdminProtectedRoute: getCurrentUser result:', currentUser);
         if (mounted) {
           setUser(currentUser);
           setLoading(false);
+          console.log('AdminProtectedRoute: Set user and loading=false');
         }
       } catch (error) {
-        console.error('Auth check error:', error);
+        console.error('AdminProtectedRoute: Auth check error:', error);
         if (mounted) {
           setAuthError('Failed to check authentication');
           setLoading(false);
@@ -35,9 +38,11 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
 
     // Listen for auth state changes
     const { data: authListener } = onAuthStateChange((user) => {
+      console.log('AdminProtectedRoute: Auth state changed:', user);
       if (mounted) {
         setUser(user);
         setLoading(false);
+        console.log('AdminProtectedRoute: Updated user from auth state change');
       }
     });
 

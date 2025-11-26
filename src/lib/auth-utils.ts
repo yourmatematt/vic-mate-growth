@@ -28,32 +28,44 @@ export interface UserWithProfile {
  */
 export async function getCurrentUser(): Promise<UserWithProfile | null> {
   try {
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    console.log('auth-utils: Getting current user...');
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-    if (userError || !user) {
+    console.log('auth-utils: Supabase getSession result:', { user: session?.user?.email, error: sessionError });
+
+    if (sessionError || !session?.user) {
+      console.log('auth-utils: No session found or error');
       return null;
     }
 
+    const user = session.user;
+
     // Get user profile with role
+    console.log('auth-utils: Fetching user profile for:', user.id);
     const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
       .select('role')
       .eq('id', user.id)
       .single();
 
+    console.log('auth-utils: User profile query result:', { profile, error: profileError });
+
     if (profileError) {
-      console.error('Error fetching user profile:', profileError);
+      console.error('auth-utils: Error fetching user profile:', profileError);
       // Default to regular user if profile not found
     }
 
-    return {
+    const result = {
       id: user.id,
       email: user.email || '',
       role: profile?.role || 'user',
       isAdmin: profile?.role === 'admin'
     };
+
+    console.log('auth-utils: Final user result:', result);
+    return result;
   } catch (error) {
-    console.error('Error getting current user:', error);
+    console.error('auth-utils: Error getting current user:', error);
     return null;
   }
 }
@@ -334,12 +346,18 @@ export async function refreshSession() {
  * Listen to auth state changes
  */
 export function onAuthStateChange(callback: (user: UserWithProfile | null) => void) {
-  return supabase.auth.onAuthStateChange(async (event, session) => {
+  console.log('auth-utils: Setting up auth state change listener');
+  const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+    console.log('auth-utils: Auth state change event:', event, session?.user?.email);
     if (session?.user) {
       const userWithProfile = await getCurrentUser();
+      console.log('auth-utils: Calling callback with user:', userWithProfile);
       callback(userWithProfile);
     } else {
+      console.log('auth-utils: Calling callback with null');
       callback(null);
     }
   });
+
+  return { data };
 }
