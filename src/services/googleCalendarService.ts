@@ -26,10 +26,10 @@ import { supabase } from '@/lib/supabase';
  * Google Calendar Service Configuration
  */
 const config: GoogleCalendarConfig = {
-  clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '',
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  redirectUri: process.env.GOOGLE_REDIRECT_URI || '',
-  calendarId: process.env.GOOGLE_CALENDAR_ID || 'matt@yourmateagency.com.au',
+  clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID || '',
+  clientSecret: '',
+  redirectUri: import.meta.env.VITE_GOOGLE_REDIRECT_URI || `${window.location.origin}/admin/google-calendar-auth`,
+  calendarId: import.meta.env.VITE_GOOGLE_CALENDAR_ID || 'primary',
   timeZone: GOOGLE_CALENDAR_CONSTANTS.TIME_ZONE,
   scopes: GOOGLE_CALENDAR_CONSTANTS.SCOPES
 };
@@ -539,7 +539,7 @@ class GoogleCalendarService {
    * Check if the service is properly configured
    */
   isConfigured(): boolean {
-    return !!(config.clientId && config.clientSecret && config.redirectUri && config.calendarId);
+    return !!(config.clientId && config.redirectUri);
   }
 
   /**

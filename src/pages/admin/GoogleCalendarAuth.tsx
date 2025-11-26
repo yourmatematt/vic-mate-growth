@@ -349,10 +349,9 @@ const GoogleCalendarAuth: React.FC = () => {
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription>
                       Google Calendar is not properly configured. Please check your environment variables:
-                      <br />• NEXT_PUBLIC_GOOGLE_CLIENT_ID
-                      <br />• GOOGLE_CLIENT_SECRET
-                      <br />• GOOGLE_REDIRECT_URI
-                      <br />• GOOGLE_CALENDAR_ID
+                      <br />• VITE_GOOGLE_CLIENT_ID
+                      <br />• VITE_GOOGLE_REDIRECT_URI (optional, defaults to current domain)
+                      <br />• VITE_GOOGLE_CALENDAR_ID (optional, defaults to 'primary')
                     </AlertDescription>
                   </Alert>
                 )}
