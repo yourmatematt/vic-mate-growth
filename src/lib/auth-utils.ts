@@ -38,34 +38,39 @@ export async function getCurrentUser(): Promise<UserWithProfile | null> {
       return null;
     }
 
-    const user = session.user;
+    return getUserWithProfile(session.user);
+  } catch (error) {
+    console.error('auth-utils: Error getting current user:', error);
+    return null;
+  }
+}
 
-    // Get user profile with role
+async function getUserWithProfile(user: { id: string; email?: string }): Promise<UserWithProfile | null> {
+  try {
     console.log('auth-utils: Fetching user profile for:', user.id);
     const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
       .select('role')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
     console.log('auth-utils: User profile query result:', { profile, error: profileError });
 
     if (profileError) {
       console.error('auth-utils: Error fetching user profile:', profileError);
-      // Default to regular user if profile not found
     }
 
     const result = {
       id: user.id,
       email: user.email || '',
-      role: profile?.role || 'user',
+      role: (profile?.role as 'user' | 'admin') || 'user',
       isAdmin: profile?.role === 'admin'
     };
 
     console.log('auth-utils: Final user result:', result);
     return result;
   } catch (error) {
-    console.error('auth-utils: Error getting current user:', error);
+    console.error('auth-utils: Error getting user profile:', error);
     return null;
   }
 }
@@ -350,7 +355,7 @@ export function onAuthStateChange(callback: (user: UserWithProfile | null) => vo
   const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
     console.log('auth-utils: Auth state change event:', event, session?.user?.email);
     if (session?.user) {
-      const userWithProfile = await getCurrentUser();
+      const userWithProfile = await getUserWithProfile(session.user);
       console.log('auth-utils: Calling callback with user:', userWithProfile);
       callback(userWithProfile);
     } else {
