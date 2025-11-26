@@ -81,6 +81,8 @@ const WebsiteAnalysisCTA: React.FC<WebsiteAnalysisCTAProps> = ({
   };
 
   if (isSubmitted) {
+    const hasWebsite = watchedValues?.websiteUrl && watchedValues.websiteUrl.trim() !== '';
+
     return (
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className="max-w-md">
@@ -90,7 +92,10 @@ const WebsiteAnalysisCTA: React.FC<WebsiteAnalysisCTAProps> = ({
               Thanks mate! We've got your details
             </h2>
             <p className="text-muted-foreground mb-6">
-              One of our digital marketing experts will analyse your website and get back to you within 24 hours with a detailed report.
+              {hasWebsite
+                ? "One of our digital marketing experts will analyse your website and get back to you within 24 hours with a detailed report."
+                : "One of our digital marketing experts will review your business details and get back to you within 24 hours with a tailored digital strategy recommendation."
+              }
             </p>
             <Button onClick={handleClose} className="mate-button-primary">
               Close

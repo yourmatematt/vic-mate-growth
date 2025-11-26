@@ -14,6 +14,7 @@ import ExitIntentPopup from "./components/ExitIntentPopup";
 import DashboardLayout from "./components/DashboardLayout";
 import GrowMyBusiness from "./pages/GrowMyBusiness";
 import Expertise from "./pages/Expertise";
+import CaseStudy from "./pages/CaseStudy";
 import Learn from "./pages/Learn";
 import About from "./pages/About";
 import LocationPage from "./pages/LocationPage";
@@ -40,6 +41,20 @@ import BreakEvenCalculator from "./pages/tools/BreakEvenCalculator";
 import SubjectLineScorer from "./pages/tools/SubjectLineScorer";
 import MarketingAssessment from "./pages/tools/MarketingAssessment";
 import BudgetAllocator from "./pages/tools/BudgetAllocator";
+
+// Admin Components
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminSettings from "./pages/admin/Settings";
+import AdminUnauthorized from "./pages/admin/Unauthorized";
+import CaseStudiesList from "./pages/admin/CaseStudiesList";
+import CreateCaseStudy from "./pages/admin/CreateCaseStudy";
+import EditCaseStudy from "./pages/admin/EditCaseStudy";
+import BookingsList from "./pages/admin/BookingsList";
+import BookingDetail from "./pages/admin/BookingDetail";
+import TimeSlots from "./pages/admin/TimeSlots";
+import BlackoutDates from "./pages/admin/BlackoutDates";
+import BookStrategyCall from "./pages/BookStrategyCall";
 
 const queryClient = new QueryClient();
 
@@ -84,6 +99,16 @@ const App = () => (
                   <Footer />
                   <ScrollToTop />
                   <SocialProofBanner />
+                </div>
+              } />
+              <Route path="/expertise/:slug" element={
+                <div className="min-h-screen flex flex-col">
+                  <Navigation />
+                  <main className="flex-1">
+                    <CaseStudy />
+                  </main>
+                  <Footer />
+                  <ScrollToTop />
                 </div>
               } />
               <Route path="/learn" element={
@@ -208,6 +233,19 @@ const App = () => (
                 </div>
               } />
 
+              {/* Book Strategy Call */}
+              <Route path="/book-strategy-call" element={
+                <div className="min-h-screen flex flex-col">
+                  <Navigation />
+                  <main className="flex-1">
+                    <BookStrategyCall />
+                  </main>
+                  <Footer />
+                  <ScrollToTop />
+                  <SocialProofBanner />
+                </div>
+              } />
+
               {/* Tools Routes */}
               <Route path="/tools" element={
                 <div className="min-h-screen flex flex-col">
@@ -239,10 +277,60 @@ const App = () => (
                 <Route path="campaigns" element={<Campaigns />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="my-tools" element={<MyTools />} />
-                <Route path="invoices" element={<Invoices />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="settings/billing" element={<Settings defaultTab="billing" />} />
                 <Route path="support" element={<Support />} />
               </Route>
+
+              {/* Admin Routes */}
+              <Route path="/admin/unauthorized" element={<AdminUnauthorized />} />
+              <Route path="/admin" element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/settings" element={
+                <AdminProtectedRoute>
+                  <AdminSettings />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/case-studies" element={
+                <AdminProtectedRoute>
+                  <CaseStudiesList />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/case-studies/new" element={
+                <AdminProtectedRoute>
+                  <CreateCaseStudy />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/case-studies/:id/edit" element={
+                <AdminProtectedRoute>
+                  <EditCaseStudy />
+                </AdminProtectedRoute>
+              } />
+
+              {/* Admin Booking Routes */}
+              <Route path="/admin/bookings" element={
+                <AdminProtectedRoute>
+                  <BookingsList />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/bookings/:id" element={
+                <AdminProtectedRoute>
+                  <BookingDetail />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/time-slots" element={
+                <AdminProtectedRoute>
+                  <TimeSlots />
+                </AdminProtectedRoute>
+              } />
+              <Route path="/admin/blackout-dates" element={
+                <AdminProtectedRoute>
+                  <BlackoutDates />
+                </AdminProtectedRoute>
+              } />
 
               {/* 404 - ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

@@ -25,7 +25,7 @@ const Navigation = () => {
     { name: 'See Our Expertise', path: '/expertise' },
     { name: 'Free Tools', path: '/tools' },
     { name: 'Learn Digital Marketing', path: '/learn' },
-    { name: 'About Us', path: '/about' }
+    { name: 'Meet Matt', path: '/about' }
   ];
 
   const isActivePath = (path: string) => {

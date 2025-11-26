@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Report Brief Meetings Are All Set!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 8px 0 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .schedule-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .schedule-box .frequency {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0369a1;
+            margin-bottom: 8px;
+        }
+        .schedule-box .details {
+            color: #64748b;
+            font-size: 14px;
+        }
+        .meeting-list {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .meeting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .meeting-item:last-child {
+            border-bottom: none;
+        }
+        .meeting-date {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .meeting-time {
+            color: #64748b;
+            font-size: 14px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .secondary-button {
+            background: transparent;
+            border: 2px solid #d1d5db;
+            color: #374151;
+        }
+        .secondary-button:hover {
+            border-color: #9ca3af;
+            transform: none;
+            box-shadow: none;
+        }
+        .info-section {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .info-section h4 {
+            margin: 0 0 8px 0;
+            color: #92400e;
+            font-size: 16px;
+        }
+        .info-section p {
+            margin: 0;
+            color: #a16207;
+            font-size: 14px;
+        }
+        .contact-info {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .contact-info h4 {
+            margin: 0 0 12px 0;
+            color: #1e293b;
+        }
+        .contact-methods {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .contact-method {
+            text-align: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .contact-method:hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+        .footer {
+            background: #f8fafc;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            .header, .content {
+                padding: 20px 15px;
+            }
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+            .meeting-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Your Report Briefs Are All Set!</h1>
+            <p>Never miss a check-in with Matt again</p>
+        </div>
+
+        <div class="content">
+            <h2>G'day {{customerName}}!</h2>
+
+            <p>Excellent choice setting up your recurring report brief meetings! You'll never have to worry about scheduling again - everything's sorted automatically.</p>
+
+            <div class="schedule-box">
+                <div class="frequency">{{meetingSchedule}}</div>
+                <div class="details">30-minute sessions • Google Meet included</div>
+            </div>
+
+            <h3>Your Next 3 Meetings</h3>
+            <div class="meeting-list">
+                {{#each nextMeetings}}
+                <div class="meeting-item">
+                    <div class="meeting-date">{{date}}</div>
+                    <div class="meeting-time">{{time}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{dashboardUrl}}" class="cta-button">View All Meetings</a>
+                <a href="mailto:matt@yourmateagency.com.au?subject=Question about my meetings" class="cta-button secondary-button">Ask Matt a Question</a>
+            </div>
+
+            <div class="info-section">
+                <h4>📅 What Happens Next?</h4>
+                <p><strong>24 hours before each meeting:</strong> You'll get an email reminder with the Google Meet link and agenda<br>
+                <strong>1 hour before:</strong> Final reminder so you don't forget<br>
+                <strong>Meeting day:</strong> Join the call and have a yarn with Matt about your business</p>
+            </div>
+
+            <h3>What We'll Cover in Your Report Briefs</h3>
+            <ul style="color: #64748b; line-height: 1.8;">
+                <li><strong>Performance Review:</strong> How your marketing's going, what's working, what's not</li>
+                <li><strong>Honest Feedback:</strong> Straight talk about your business (no sugar-coating)</li>
+                <li><strong>Next Steps:</strong> Clear priorities for the coming month</li>
+                <li><strong>Your Questions:</strong> Whatever's on your mind about your business</li>
+                <li><strong>Quick Wins:</strong> Simple things you can implement right away</li>
+            </ul>
+
+            <div class="info-section">
+                <h4>💡 Pro Tip</h4>
+                <p>Before each meeting, jot down any questions or challenges you're facing. The more you bring to our chats, the more value you'll get out of them!</p>
+            </div>
+
+            <h3>Need to Change Something?</h3>
+            <p>No worries mate! You can:</p>
+            <ul style="color: #64748b;">
+                <li><strong>Reschedule individual meetings:</strong> Just hit reply and let me know</li>
+                <li><strong>Change your regular time:</strong> Log into your dashboard and update your schedule</li>
+                <li><strong>Pause meetings:</strong> Going on holiday? Just give me a heads up</li>
+            </ul>
+
+            <div class="contact-info">
+                <h4>Questions? Just Reach Out</h4>
+                <div class="contact-methods">
+                    <a href="mailto:matt@yourmateagency.com.au" class="contact-method">
+                        📧<br>Email Matt
+                    </a>
+                    <a href="tel:+61478101521" class="contact-method">
+                        📞<br>Call/SMS<br>+61 478 101 521
+                    </a>
+                    <a href="{{dashboardUrl}}" class="contact-method">
+                        💻<br>Client Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Looking forward to our regular chats!<br>
+            <strong>Matt</strong><br>
+            Your Mate Agency</p>
+
+            <p style="margin-top: 20px; font-size: 12px;">
+                <a href="{{unsubscribeUrl}}">Update email preferences</a> |
+                ABN: 37179872328 |
+                <a href="https://yourmateagency.com.au">yourmateagency.com.au</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -36,7 +36,6 @@ const DashboardLayout = () => {
     { name: 'Campaigns', href: '/dashboard/campaigns', icon: Megaphone },
     { name: 'Reports', href: '/dashboard/reports', icon: BarChart3 },
     { name: 'My Tools', href: '/dashboard/my-tools', icon: Calculator },
-    { name: 'Invoices', href: '/dashboard/invoices', icon: FileText },
     { name: 'Settings', href: '/dashboard/settings', icon: Settings },
     { name: 'Support', href: '/dashboard/support', icon: HelpCircle },
   ];

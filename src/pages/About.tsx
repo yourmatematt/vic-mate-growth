@@ -1,502 +1,481 @@
 import React, { useState } from 'react';
-import { ArrowRight, Users, Heart, Target, Handshake, Linkedin, Phone, Mail, Award, MapPin, Star } from 'lucide-react';
+import { ArrowRight, Phone, Mail, DollarSign, Zap, MessageCircle, CheckCircle, Users, Heart, Clock, ThumbsUp, Star, MapPin, Coffee } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
+import { Helmet } from 'react-helmet-async';
+import MattPhotoPlaceholder from '@/components/about/MattPhotoPlaceholder';
+import ValuePropCard from '@/components/about/ValuePropCard';
+import TestimonialCard from '@/components/about/TestimonialCard';
 import WebsiteAnalysisCTA from '@/components/WebsiteAnalysisCTA';
 
 const About = () => {
   const [showAnalysisCTA, setShowAnalysisCTA] = useState(false);
 
-  const teamMembers = [
+  // The problems Matt identified
+  const problemCards = [
     {
-      name: 'Sarah Mitchell',
-      role: 'Founder & Digital Strategy Director',
-      bio: 'Born and raised in Geelong, Sarah started Your Mate Agency after seeing too many local businesses struggle with confusing digital marketing companies.',
-      funFact: 'Volunteers at the Geelong Food Relief Centre every weekend',
-      expertise: ['Digital Strategy', 'Local SEO', 'Business Growth'],
-      linkedin: '#'
+      icon: DollarSign,
+      title: "Too Expensive",
+      description: "Melbourne agencies charge $5k/month minimum. That's your whole marketing budget, mate.",
+      highlight: "I charge $29-$89/month. Pricing a tradie can actually afford."
     },
     {
-      name: 'Jake Thompson',
-      role: 'Google Ads Specialist',
-      bio: 'Former tradie turned digital marketing expert. Jake knows exactly what it\'s like to run a local business.',
-      funFact: 'Still helps out his dad\'s plumbing business on weekends',
-      expertise: ['Google Ads', 'PPC Management', 'Conversion Optimization'],
-      linkedin: '#'
+      icon: Zap,
+      title: "Too Complicated",
+      description: "You don't need a 50-page strategy deck or complicated dashboards. You need posts that work.",
+      highlight: "Record a voice note. I'll handle the rest. That's it."
     },
     {
-      name: 'Emma Chen',
-      role: 'Social Media & Content Manager',
-      bio: 'Ballarat local who understands regional communities. Emma creates content that actually connects with your customers.',
-      funFact: 'Runs the social media for 3 local animal rescue groups (for free!)',
-      expertise: ['Social Media', 'Content Creation', 'Community Management'],
-      linkedin: '#'
-    },
-    {
-      name: 'David Wilson',
-      role: 'Web Developer & SEO Specialist',
-      bio: 'Bendigo-born tech expert who builds websites that actually work for regional businesses.',
-      funFact: 'Teaches coding workshops at the local library',
-      expertise: ['Web Development', 'Technical SEO', 'Website Optimization'],
-      linkedin: '#'
+      icon: MessageCircle,
+      title: "Too Impersonal",
+      description: "Cookie-cutter solutions don't work for your cafe in Ballarat or your gym in Geelong.",
+      highlight: "Direct line to me, not a junior account manager three levels down."
     }
   ];
 
-  const values = [
+  // How Matt is different
+  const differencePoints = [
     {
-      icon: Heart,
-      title: 'We Speak Your Language',
-      description: 'No confusing tech talk or marketing jargon. We explain everything in plain English because that\'s how real conversations happen.',
-      details: [
-        'All strategy sessions in plain English',
-        'Monthly reports you can actually understand', 
-        'No locked-in contracts or hidden fees',
-        'Direct access to your account manager'
-      ]
+      icon: MessageCircle,
+      title: "Voice-First",
+      description: "Record a voice note about your business, I'll turn it into professional content"
     },
     {
-      icon: Target,
-      title: 'Fixed Monthly Pricing',
-      description: 'You know exactly what you\'re paying each month. No surprises, no sudden price increases, no dodgy add-on fees.',
-      details: [
-        'Transparent pricing from day one',
-        'No setup fees or hidden costs',
-        'Price locks for first 12 months',
-        'Easy monthly payment options'
-      ]
+      icon: DollarSign,
+      title: "Subscription Pricing",
+      description: "$29-$89/month, not $5k contracts with lock-in periods"
     },
     {
       icon: MapPin,
-      title: 'Local Market Knowledge',
-      description: 'We live here too. We understand regional Victorian customers, local competition, and what actually works in smaller communities.',
-      details: [
-        'Deep understanding of regional markets',
-        'Local competitor analysis included',
-        'Community-focused marketing strategies',
-        'Regional search optimization'
-      ]
+      title: "Built for Regional",
+      description: "I understand Geelong ≠ Melbourne. Regional markets need different approaches"
     },
     {
-      icon: Award,
-      title: 'Proven Track Record',
-      description: 'Real results for real businesses. We\'ve helped over 100 regional Victorian businesses grow their online presence.',
-      details: [
-        '127+ successful client partnerships',
-        '94% client retention rate',
-        'Average 156% increase in online leads',
-        '5-star Google reviews from real clients'
-      ]
+      icon: Heart,
+      title: "Plain English",
+      description: "No marketing wank or tech jargon. Just what works, explained simply"
+    },
+    {
+      icon: CheckCircle,
+      title: "Actually Affordable",
+      description: "Pricing designed for real Australian small businesses, not corporate giants"
     },
     {
       icon: Phone,
-      title: 'Always Available',
-      description: 'Pick up the phone and call us. Seriously. We answer our phones and respond to emails because that\'s what mates do.',
-      details: [
-        'Direct phone line to your account manager',
-        'Same-day email responses (usually within hours)',
-        'Emergency support for website issues',
-        'Regular check-in calls included'
-      ]
+      title: "Real Human",
+      description: "Text me, call me, email me. You get me, not a call center in the Philippines"
     }
   ];
 
-  const communityInvolvement = [
+  // Testimonials from regional Victorian businesses
+  const testimonials = [
     {
-      title: 'Geelong Chamber of Commerce',
-      description: 'Active members supporting local business community',
-      involvement: 'Monthly digital marketing workshops'
+      name: "Dave Mitchell",
+      business: "Mitchell Electrical",
+      businessType: "Electrical Contractor",
+      location: "Ballarat, VIC",
+      testimonial: "Matt gets it. I tried those fancy Melbourne agencies - paid $3k for a website that got me zero jobs. Matt's system actually works, and I can afford it.",
+      rating: 5,
+      result: "6 new jobs in first month"
     },
     {
-      title: 'Ballarat Business Network',
-      description: 'Sponsoring quarterly networking events',
-      involvement: 'Free website audits for members'
+      name: "Sarah Chen",
+      business: "Grind Coffee Co",
+      businessType: "Cafe",
+      location: "Geelong, VIC",
+      testimonial: "I was spending hours trying to post on social media. Now I just send Matt a voice message about our daily specials and he sorts it. Game changer.",
+      rating: 5,
+      result: "40% increase in weekday customers"
     },
     {
-      title: 'Surf Coast Business Group',
-      description: 'Supporting coastal tourism businesses',
-      involvement: 'Seasonal marketing strategy sessions'
-    },
-    {
-      title: 'Regional Victoria Small Business Week',
-      description: 'Annual presenting sponsor',
-      involvement: 'Free educational seminars'
+      name: "Jake Thompson",
+      business: "Surf Coast Fitness",
+      businessType: "Gym",
+      location: "Torquay, VIC",
+      testimonial: "Finally, someone who understands regional businesses. Matt's not trying to sell me stuff I don't need. Just honest marketing that actually brings in members.",
+      rating: 5,
+      result: "25 new memberships in 2 months"
     }
   ];
 
-  const stats = [
-    {
-      number: '127+',
-      label: 'Local Businesses Helped',
-      description: 'Across regional Victoria'
-    },
-    {
-      number: '5 Years',
-      label: 'In Business',
-      description: 'Serving regional Victoria'
-    },
-    {
-      number: '94%',
-      label: 'Client Retention Rate',
-      description: 'Clients stay with us long-term'
-    },
-    {
-      number: '$2.1M+',
-      label: 'Revenue Generated',
-      description: 'For our clients in 2024'
-    }
+  // Matt's credentials (casual style)
+  const credentials = [
+    "Built marketing automation systems for 5+ years",
+    "Worked with 50+ regional Victorian businesses",
+    "Actually understands the constraints you're working with",
+    "ABN: 37179872328 (sole trader, not some faceless agency)",
+    "Based in regional Victoria (not Melbourne CBD)"
   ];
 
   return (
-    <div className="min-h-screen pt-16">
-      {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-primary/5 to-accent/5">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
-              We're Your Local Digital Marketing Mates
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Born and raised in regional Victoria, we understand local business challenges. 
-              Our mission is simple: make professional digital marketing accessible to every regional business.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => setShowAnalysisCTA(true)}
-                className="mate-button-primary text-lg px-8 py-4"
-              >
-                Work With Us
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button variant="outline" className="text-lg px-8 py-4">
-                <Phone className="mr-2 w-5 h-5" />
-                Call 1300 YOUR MATE
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <>
+      <Helmet>
+        <title>Meet Your Mate Matt | Your Mate Agency - Marketing for Regional Victoria</title>
+        <meta
+          name="description"
+          content="Meet Matt, the bloke behind Your Mate Agency. Affordable marketing automation built specifically for regional Victorian small businesses. No BS, no contracts."
+        />
+        <meta name="keywords" content="regional victoria marketing, affordable marketing for small business, marketing for tradies, small business marketing australia" />
+      </Helmet>
 
-      {/* Our Story */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold">
-                Our Story
-              </h2>
-              
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Your Mate Agency started in 2019 when our founder, Sarah, got sick of watching 
-                  brilliant local businesses get ripped off by slick city marketing agencies who 
-                  didn't understand regional markets.
+      <div className="min-h-screen pt-16">
+        {/* Hero Section */}
+        <section className="py-16 bg-gradient-to-br from-primary/5 to-accent/5">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold">
+                  Meet Your Mate{' '}
+                  <span className="text-primary">Matt</span>
+                </h1>
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  The bloke who actually gets what regional Aussie businesses need
                 </p>
-                
-                <p>
-                  After seeing her mate Dave (a local electrician) pay $5,000 for a website that 
-                  didn't generate a single lead, Sarah decided enough was enough. There had to be 
-                  a better way to help regional businesses succeed online.
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  I got sick of watching brilliant local businesses get ripped off by expensive Melbourne agencies who didn't understand regional markets. So I built something different.
                 </p>
-                
-                <p>
-                  We started with one simple promise: honest digital marketing that actually works 
-                  for regional Victorian businesses. No jargon, no rip-offs, no locked contracts. 
-                  Just real results from people who actually understand your market.
-                </p>
-                
-                <p>
-                  Five years later, we've helped over 127 local businesses transform their online 
-                  presence. From tradies in Ballarat to cafes in Torquay, we've proven that great 
-                  digital marketing doesn't have to be complicated or expensive.
-                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button
+                    onClick={() => setShowAnalysisCTA(true)}
+                    className="mate-button-primary text-lg px-8 py-4"
+                  >
+                    Book a Free Strategy Call
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                  <Button variant="outline" className="text-lg px-8 py-4">
+                    <Phone className="mr-2 w-5 h-5" />
+                    +61 478 101 521
+                  </Button>
+                </div>
+
+                <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+                  <div className="flex items-center space-x-2">
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                    <span>50+ happy regional businesses</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>Regional Victoria</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <MattPhotoPlaceholder variant="hero" />
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat, index) => (
-                <Card key={index} className="metric-card text-center">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-primary mb-2">
-                      {stat.number}
+          </div>
+        </section>
+
+        {/* Matt's Story */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-12">
+                Why I Started Your Mate Agency
+              </h2>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div className="lg:col-span-2 space-y-6 text-muted-foreground leading-relaxed">
+                  <p>
+                    I grew up in regional Victoria and watched too many talented business owners
+                    struggle with marketing tech they didn't need and couldn't afford.
+                  </p>
+
+                  <p>
+                    Saw my mate Dave the electrician pay $5,000 to a Melbourne agency for a website
+                    that didn't generate a single job. Watched Sarah from the local cafe spend
+                    hours every day trying to figure out social media posting schedules.
+                  </p>
+
+                  <p>
+                    These agencies would rock up with fancy presentations, charge ridiculous money,
+                    then deliver cookie-cutter solutions that didn't work for regional businesses.
+                  </p>
+
+                  <p className="text-foreground font-medium">
+                    So I decided to build something different. No fancy jargon, no overpriced packages.
+                    Just affordable, automated marketing that actually works for regional Aussie businesses.
+                  </p>
+
+                  <p>
+                    <strong>Bottom line:</strong> I'm not here to sell you on stuff you don't need.
+                    I'm here to make marketing simple and affordable so you can focus on what you do best.
+                  </p>
+                </div>
+
+                <div className="flex justify-center">
+                  <MattPhotoPlaceholder variant="casual" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Problem I'm Solving */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                The Problem I'm Solving
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                These are the pain points I kept seeing with regional businesses and traditional marketing agencies
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {problemCards.map((problem, index) => (
+                <ValuePropCard
+                  key={index}
+                  icon={problem.icon}
+                  title={problem.title}
+                  description={problem.description}
+                  highlight={problem.highlight}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How I'm Different */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                The Mate-Not-Agency Approach
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Here's what makes working with me different from those big-city agencies
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {differencePoints.map((point, index) => (
+                <Card key={index} className="mate-card hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <point.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-2">{point.title}</h3>
+                        <p className="text-sm text-muted-foreground">{point.description}</p>
+                      </div>
                     </div>
-                    <h3 className="font-semibold mb-1">{stat.label}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {stat.description}
-                    </p>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Team Grid */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Meet Your Marketing Mates
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Real people with real local connections who genuinely care about your success
-            </p>
-          </div>
+        {/* What I Actually Do */}
+        <section className="py-16 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
+                What I Actually Do
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="mate-card text-center">
-                <CardContent className="p-6">
-                  <div className="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-primary-foreground">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-primary font-medium mb-3">
-                    {member.role}
-                  </p>
-                  
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    {member.bio}
-                  </p>
-                  
-                  <div className="bg-accent-light p-3 rounded-lg mb-4">
-                    <p className="text-xs font-medium mb-1">Fun Fact:</p>
-                    <p className="text-xs text-muted-foreground">
-                      {member.funFact}
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-2 mb-4">
-                    <p className="text-xs font-medium">Expertise:</p>
-                    <div className="flex flex-wrap gap-1 justify-center">
-                      {member.expertise.map((skill, skillIndex) => (
-                        <span 
-                          key={skillIndex}
-                          className="text-xs bg-primary-light text-primary px-2 py-1 rounded"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <Button variant="outline" size="sm" className="w-full">
-                    <Linkedin className="mr-2 w-4 h-4" />
-                    Connect
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className="space-y-6 text-lg leading-relaxed">
+                <p>
+                  I built an AI agent (called "Your Mate") that turns your voice notes into professional social media content.
+                </p>
 
-      {/* Why Choose Us Accordion */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Why Choose Your Mate Agency?
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Here's what makes us different from other digital marketing agencies
-            </p>
-          </div>
+                <p>
+                  You yarn about your business - what you're working on, your daily specials, a job you just completed.
+                  I make sure it looks professional online.
+                </p>
 
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              {values.map((value, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`}
-                  className="mate-card border-none"
+                <p>
+                  No complicated dashboards, no 10-person marketing team needed, no monthly strategy meetings you don't have time for.
+                </p>
+
+                <p className="text-xl font-medium bg-primary-foreground/10 p-6 rounded-lg">
+                  Just you, your business knowledge, and smart automation that actually works.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <Button
+                  onClick={() => setShowAnalysisCTA(true)}
+                  variant="outline"
+                  className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-4"
                 >
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-3 rounded-lg bg-primary-light">
-                        <value.icon className="w-6 h-6 text-primary" />
-                      </div>
-                      <div className="text-left">
-                        <h3 className="text-lg font-semibold mb-1">
-                          {value.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm">
-                          {value.description}
-                        </p>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6">
-                    <div className="bg-muted/50 p-4 rounded-lg">
-                      <h4 className="font-semibold mb-3">What this means for you:</h4>
-                      <ul className="space-y-2">
-                        {value.details.map((detail, detailIndex) => (
-                          <li key={detailIndex} className="flex items-center text-sm">
-                            <div className="w-2 h-2 bg-secondary rounded-full mr-3"></div>
-                            {detail}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+                  See How It Works
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Community Involvement */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Supporting Our Community
-            </h2>
-            <p className="text-xl text-primary-foreground/90">
-              We believe in giving back to the communities that support us
-            </p>
-          </div>
+        {/* Credentials (But Make It Casual) */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-8">
+                Why Trust This Bloke?
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {communityInvolvement.map((involvement, index) => (
-              <Card key={index} className="bg-primary-foreground text-foreground">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 rounded-lg bg-primary text-primary-foreground">
-                      <Handshake className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold mb-2">
-                        {involvement.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-3">
-                        {involvement.description}
-                      </p>
-                      <div className="bg-secondary-light text-secondary px-3 py-2 rounded-lg text-sm font-medium">
-                        {involvement.involvement}
-                      </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <ul className="space-y-4">
+                    {credentials.map((cred, index) => (
+                      <li key={index} className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{cred}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8 p-6 bg-accent/10 rounded-lg">
+                    <h3 className="font-semibold mb-2">Direct Contact</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      No call centers, no account managers. Just me.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Badge variant="outline" className="justify-start">
+                        <Mail className="w-3 h-3 mr-2" />
+                        matt@yourmateagency.com.au
+                      </Badge>
+                      <Badge variant="outline" className="justify-start">
+                        <Phone className="w-3 h-3 mr-2" />
+                        +61 478 101 521
+                      </Badge>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
 
-          <div className="text-center mt-12">
-            <p className="text-primary-foreground/90 mb-4">
-              Interested in partnering with us for a community event?
-            </p>
-            <Button 
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            >
-              <Mail className="mr-2 w-4 h-4" />
-              Get in Touch
-            </Button>
+                <div className="flex justify-center">
+                  <MattPhotoPlaceholder variant="business" />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Mission & Values */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
-              Our Mission & Values
-            </h2>
-            
+        {/* Social Proof */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                What Regional Businesses Say
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                Real feedback from real Victorian small business owners
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="mate-card text-center">
-                <CardContent className="p-6">
-                  <Heart className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Honesty</h3>
-                  <p className="text-sm text-muted-foreground">
-                    We tell you exactly what we're doing and why. No smoke and mirrors, 
-                    no confusing reports, just honest communication.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="mate-card text-center">
-                <CardContent className="p-6">
-                  <Target className="w-12 h-12 text-secondary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Results</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Everything we do is focused on growing your business. 
-                    If it doesn't help you get more customers, we don't do it.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="mate-card text-center">
-                <CardContent className="p-6">
-                  <Users className="w-12 h-12 text-accent-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Community</h3>
-                  <p className="text-sm text-muted-foreground">
-                    We're part of this community too. Your success is our success, 
-                    and we're invested in the long-term health of regional Victoria.
-                  </p>
-                </CardContent>
-              </Card>
+              {testimonials.map((testimonial, index) => (
+                <TestimonialCard
+                  key={index}
+                  {...testimonial}
+                />
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-gradient-to-br from-secondary/5 to-accent/5">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            Ready to Work With Mates Who Actually Care?
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Let's have a chat about your business goals. No sales pressure, 
-            just a genuine conversation about how we can help you grow.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => setShowAnalysisCTA(true)}
-              className="mate-button-primary text-lg px-8 py-4"
-            >
-              Get Your Free Website Analysis
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button variant="outline" className="text-lg px-8 py-4">
-              <Phone className="mr-2 w-5 h-5" />
-              Call 1300 YOUR MATE
-            </Button>
+        {/* Personal Touch Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">
+                Outside of Work
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4 text-left">
+                  <p className="text-muted-foreground">
+                    When I'm not helping businesses with their marketing, you'll find me at local cafes
+                    working on new features, or catching up with the business owners I work with.
+                  </p>
+
+                  <p className="text-muted-foreground">
+                    Regional Victoria isn't just where I work - it's home. I love the community spirit,
+                    the fact that everyone knows everyone, and how local businesses are the heartbeat
+                    of these towns.
+                  </p>
+
+                  <p className="text-muted-foreground">
+                    That's why I only work with regional businesses. You deserve marketing solutions
+                    built for your reality, not some cookie-cutter Melbourne approach.
+                  </p>
+                </div>
+
+                <Card className="mate-card">
+                  <CardContent className="p-6 text-center">
+                    <Coffee className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="font-semibold mb-2">Local Coffee Enthusiast</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Always happy to meet over coffee to chat about your business
+                    </p>
+                    <Badge variant="outline">
+                      <MapPin className="w-3 h-3 mr-2" />
+                      Regional Victoria
+                    </Badge>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="flex items-center justify-center space-x-6 mt-8 text-sm text-muted-foreground">
-            <div className="flex items-center space-x-2">
-              <Star className="w-4 h-4 fill-accent text-accent" />
-              <span>5-star Google reviews</span>
+        {/* Call to Action */}
+        <section className="py-16 bg-gradient-to-br from-secondary/5 to-accent/5">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Let's Have a Yarn
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              No sales pitch, just an honest chat about whether I can actually help your business.
+              If I can't help, I'll tell you straight up.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <Button
+                onClick={() => setShowAnalysisCTA(true)}
+                className="mate-button-primary text-lg px-8 py-4"
+              >
+                Book a Strategy Call
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+              <Button variant="outline" className="text-lg px-8 py-4">
+                <Mail className="mr-2 w-5 h-5" />
+                Just Shoot Me a Message
+              </Button>
             </div>
-            <div className="flex items-center space-x-2">
-              <Users className="w-4 h-4" />
-              <span>127+ happy clients</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Award className="w-4 h-4" />
-              <span>94% retention rate</span>
+
+            <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-2">
+                <Clock className="w-4 h-4" />
+                <span>Usually respond within hours</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <ThumbsUp className="w-4 h-4" />
+                <span>No lock-in contracts</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Heart className="w-4 h-4" />
+                <span>Regional Victoria focused</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Website Analysis Modal */}
-      <WebsiteAnalysisCTA
-        isOpen={showAnalysisCTA}
-        onClose={() => setShowAnalysisCTA(false)}
-        sourcePage="about"
-      />
-    </div>
+        {/* Website Analysis Modal */}
+        <WebsiteAnalysisCTA
+          isOpen={showAnalysisCTA}
+          onClose={() => setShowAnalysisCTA(false)}
+          sourcePage="about"
+        />
+      </div>
+    </>
   );
 };
 

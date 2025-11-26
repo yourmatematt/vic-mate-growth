@@ -1,0 +1,391 @@
+{
+  "userId": "user_abc123_tradies_mate_plumbing",
+  "profileGeneratedAt": "2024-11-20T14:30:00.000Z",
+  "dataCollectionPeriod": {
+    "startDate": "2024-08-20T00:00:00.000Z",
+    "endDate": "2024-11-20T00:00:00.000Z",
+    "totalDays": 92
+  },
+  "activityMetrics": {
+    "totalPosts": 34,
+    "totalRevisions": 28,
+    "totalComments": 12,
+    "postsPerPlatform": {
+      "facebook": 18,
+      "instagram": 12,
+      "linkedin": 3,
+      "twitter": 1
+    },
+    "avgRevisionsPerPost": 0.82,
+    "daysActive": 31
+  },
+  "writingStyleProfile": {
+    "formalityScore": 25,
+    "conversationalScore": 75,
+    "enthusiasmScore": 68,
+    "averageSentenceLength": 12.4,
+    "averageWordLength": 4.2,
+    "paragraphStyle": "short",
+    "emojiUsage": {
+      "frequency": 8.2,
+      "preferredEmojis": [
+        { "emoji": "🔧", "frequency": 12 },
+        { "emoji": "👍", "frequency": 8 },
+        { "emoji": "💪", "frequency": 6 },
+        { "emoji": "🏠", "frequency": 5 },
+        { "emoji": "⭐", "frequency": 4 }
+      ],
+      "emojiPlacement": "end",
+      "emojiDensity": "moderate",
+      "contextualUsage": {
+        "promotional": 15,
+        "celebratory": 8,
+        "informational": 5,
+        "emotional": 3
+      }
+    },
+    "punctuationStyle": {
+      "exclamationUsage": 4.2,
+      "questionUsage": 2.1,
+      "ellipsisUsage": 1,
+      "dashUsage": 3,
+      "commaStyle": "standard",
+      "quotationStyle": "double"
+    },
+    "capitalizationStyle": {
+      "titleCaseUsage": 2,
+      "allCapsUsage": 1,
+      "sentenceCasePreference": 85,
+      "brandNameCapitalization": ["Tradies Mate Plumbing", "EMERGENCY PLUMBING"]
+    },
+    "callToActionStyle": {
+      "frequency": 1.2,
+      "preferredCTAs": [
+        { "phrase": "give us a call", "frequency": 8 },
+        { "phrase": "book today", "frequency": 6 },
+        { "phrase": "no worries", "frequency": 4 },
+        { "phrase": "get in touch", "frequency": 3 }
+      ],
+      "ctaPlacement": "end",
+      "ctaStyle": "friendly",
+      "urgencyLevel": "medium"
+    },
+    "hashtagUsage": {
+      "frequency": 2.8,
+      "averageHashtagsPerPost": 3.2,
+      "hashtagPlacement": "end",
+      "hashtagStyle": "CamelCase",
+      "brandedHashtags": ["#TradiesMate", "#PlumbingMelbourne", "#ReliablePlumber"],
+      "industryHashtags": ["#Plumbing", "#EmergencyPlumber", "#BlockedDrains"],
+      "locationHashtags": ["#Melbourne", "#Bayside", "#SouthEast"]
+    },
+    "questionUsage": {
+      "frequency": 1.8,
+      "questionTypes": ["open-ended", "rhetorical"],
+      "questionPlacement": "beginning",
+      "engagementQuestions": [
+        "Got a plumbing emergency?",
+        "Need a reliable tradesman?",
+        "Sick of dodgy plumbers?"
+      ]
+    },
+    "australianSlangUsage": 12.5,
+    "localReferences": [
+      "Melbourne",
+      "Bayside",
+      "South East suburbs",
+      "Fair dinkum service",
+      "Local tradies"
+    ],
+    "personalityTraits": [
+      {
+        "trait": "Reliable",
+        "strength": 85,
+        "examples": ["Always on time", "Gets the job done right"],
+        "manifestations": ["Punctuality emphasis", "Quality assurance language"]
+      },
+      {
+        "trait": "Approachable",
+        "strength": 78,
+        "examples": ["No worries mate", "Happy to help"],
+        "manifestations": ["Casual language", "Friendly tone"]
+      },
+      {
+        "trait": "Local",
+        "strength": 72,
+        "examples": ["Your local plumber", "Know the area well"],
+        "manifestations": ["Location references", "Community connection"]
+      }
+    ],
+    "brandValues": ["Reliability", "Quality", "Local Community", "Fair Pricing"],
+    "communicationApproach": "friendly"
+  },
+  "platformPreferences": {
+    "facebook": {
+      "platform": "facebook",
+      "postCount": 18,
+      "adaptedStyle": {
+        "formalityAdjustment": -5,
+        "lengthPreference": "longer",
+        "emojiUsageAdjustment": 3,
+        "hashtagDensity": 2.1
+      },
+      "preferredTerms": ["community", "local", "family", "trusted", "emergency"],
+      "avoidedTerms": [],
+      "commonTopics": ["emergency repairs", "maintenance tips", "customer stories"],
+      "contentTypes": ["promotional", "educational", "behind-the-scenes"]
+    },
+    "instagram": {
+      "platform": "instagram",
+      "postCount": 12,
+      "adaptedStyle": {
+        "formalityAdjustment": -8,
+        "lengthPreference": "shorter",
+        "emojiUsageAdjustment": 8,
+        "hashtagDensity": 5.2
+      },
+      "preferredTerms": ["before", "after", "transformation", "quality", "craftsmanship"],
+      "avoidedTerms": [],
+      "commonTopics": ["before/after photos", "work progress", "tools"],
+      "contentTypes": ["promotional", "behind-the-scenes"]
+    },
+    "linkedin": {
+      "platform": "linkedin",
+      "postCount": 3,
+      "adaptedStyle": {
+        "formalityAdjustment": 15,
+        "lengthPreference": "same",
+        "emojiUsageAdjustment": -5,
+        "hashtagDensity": 1.8
+      },
+      "preferredTerms": ["professional", "experienced", "qualified", "certified"],
+      "avoidedTerms": ["mate"],
+      "commonTopics": ["industry updates", "professional development"],
+      "contentTypes": ["professional", "educational"]
+    },
+    "twitter": {
+      "platform": "twitter",
+      "postCount": 1,
+      "adaptedStyle": {
+        "formalityAdjustment": 0,
+        "lengthPreference": "shorter",
+        "emojiUsageAdjustment": 0,
+        "hashtagDensity": 3.0
+      },
+      "preferredTerms": [],
+      "avoidedTerms": [],
+      "commonTopics": [],
+      "contentTypes": []
+    }
+  },
+  "editPatterns": [
+    {
+      "patternId": "vocabulary_1637123456",
+      "patternType": "vocabulary",
+      "description": "User consistently replaces formal terms with casual Australian expressions",
+      "frequency": 75,
+      "confidence": 88,
+      "examples": [
+        {
+          "postId": "post_123",
+          "revisionId": "rev_456",
+          "platform": "facebook",
+          "originalText": "We provide professional plumbing services",
+          "editedText": "We're your local plumbing experts - fair dinkum service, every time!",
+          "changeType": "replacement",
+          "editedAt": "2024-11-15T09:30:00Z"
+        },
+        {
+          "postId": "post_124",
+          "revisionId": "rev_457",
+          "platform": "instagram",
+          "originalText": "Contact us for assistance",
+          "editedText": "Give us a bell - we're here to help!",
+          "changeType": "replacement",
+          "editedAt": "2024-11-16T14:20:00Z"
+        }
+      ],
+      "insights": [
+        "User prefers casual Australian expressions over formal business language",
+        "Strong preference for 'mate' culture and local terminology"
+      ],
+      "aiGuidance": "When generating content, use casual Australian expressions like 'give us a bell', 'fair dinkum', and 'no worries' instead of formal business language"
+    },
+    {
+      "patternId": "tone_1637123457",
+      "patternType": "tone",
+      "description": "User consistently makes AI content more conversational and personal",
+      "frequency": 68,
+      "confidence": 82,
+      "examples": [
+        {
+          "postId": "post_125",
+          "revisionId": "rev_458",
+          "platform": "facebook",
+          "originalText": "Our company has extensive experience in residential plumbing",
+          "editedText": "Been fixing blocked drains and burst pipes around Melbourne for over 10 years - we know what we're doing!",
+          "changeType": "replacement",
+          "editedAt": "2024-11-17T11:45:00Z"
+        }
+      ],
+      "insights": [
+        "User prefers first-person narrative over corporate third-person",
+        "Adds specific details and local context to generic statements"
+      ],
+      "aiGuidance": "Write in first person, include specific local details, and use conversational language that sounds like a real person talking"
+    }
+  ],
+  "vocabularyPreferences": {
+    "favoriteWords": [
+      { "word": "mate", "frequency": 23, "contexts": ["greetings", "friendly address", "casual conversation"] },
+      { "word": "quality", "frequency": 18, "contexts": ["service description", "work standards", "value proposition"] },
+      { "word": "local", "frequency": 16, "contexts": ["service area", "community connection", "proximity"] },
+      { "word": "reliable", "frequency": 14, "contexts": ["service promise", "brand values", "trust building"] },
+      { "word": "emergency", "frequency": 12, "contexts": ["urgent services", "availability", "problem solving"] }
+    ],
+    "favoritePhrases": [
+      { "phrase": "no worries", "frequency": 15, "usage": "Reassurance and casual response" },
+      { "phrase": "give us a call", "frequency": 12, "usage": "Call-to-action" },
+      { "phrase": "fair dinkum", "frequency": 8, "usage": "Authenticity and quality emphasis" },
+      { "phrase": "your local", "frequency": 10, "usage": "Community connection and proximity" },
+      { "phrase": "we're here to help", "frequency": 7, "usage": "Service commitment and availability" }
+    ],
+    "avoidedWords": [
+      { "originalWord": "utilize", "replacementWord": "use", "frequency": 5, "context": "Simplifies language" },
+      { "originalWord": "facilitate", "replacementWord": "help", "frequency": 3, "context": "More direct communication" }
+    ],
+    "businessTerminology": [
+      "plumbing", "blocked drains", "burst pipes", "hot water", "emergency repairs",
+      "maintenance", "installation", "leak detection", "pipe relining"
+    ],
+    "signaturePhrases": [
+      "Your trusted local plumber",
+      "Fair dinkum service, every time",
+      "We get the job done right"
+    ],
+    "brandLanguage": [
+      "Tradies Mate", "reliable service", "quality workmanship",
+      "emergency plumbing", "local expertise"
+    ],
+    "australianTerms": [
+      "colour", "centre", "favour", "realise", "organise"
+    ],
+    "slangTerms": [
+      "mate", "fair dinkum", "no worries", "g'day", "arvo", "tradie"
+    ],
+    "positiveWords": [
+      "fantastic", "great", "excellent", "amazing", "love", "brilliant"
+    ],
+    "urgencyWords": [
+      "emergency", "urgent", "immediate", "same day", "24/7", "asap"
+    ],
+    "trustWords": [
+      "reliable", "trusted", "guaranteed", "licensed", "insured", "experienced"
+    ]
+  },
+  "feedbackPatterns": [
+    {
+      "patternType": "suggestion",
+      "commonThemes": ["tone adjustment", "local emphasis", "call-to-action improvement"],
+      "frequency": 67,
+      "commonRequests": [
+        "Make it sound more like me talking",
+        "Add more local Melbourne references",
+        "Don't sound too corporate"
+      ],
+      "qualityIndicators": ["authentic", "relatable", "local", "trustworthy"],
+      "examples": [
+        {
+          "comment": "This sounds good but maybe add 'Melbourne' somewhere so people know we're local",
+          "postContext": "Been fixing blocked drains for over 10 years...",
+          "timestamp": "2024-11-15T10:30:00Z"
+        },
+        {
+          "comment": "Perfect! This sounds exactly like how I'd say it",
+          "postContext": "No worries mate, we'll have your hot water sorted in no time...",
+          "timestamp": "2024-11-16T15:45:00Z"
+        }
+      ]
+    }
+  ],
+  "rejectionPatterns": [
+    {
+      "rejectionType": "vocabulary",
+      "description": "Terms consistently removed from AI-generated content",
+      "frequency": 85,
+      "alwaysChanged": ["utilize", "facilitate", "commence", "endeavour", "comprehensive"],
+      "neverUsed": ["synergy", "paradigm", "optimization", "leverage", "robust"],
+      "avoidedStyles": ["corporate jargon", "overly formal language", "complex terminology"]
+    },
+    {
+      "rejectionType": "tone",
+      "description": "Always makes content more casual and Australian",
+      "frequency": 78,
+      "alwaysChanged": ["professional demeanor", "corporate speak", "third person references"],
+      "neverUsed": [],
+      "avoidedStyles": ["formal business tone", "impersonal language", "corporate positioning"]
+    }
+  ],
+  "temporalPatterns": [
+    {
+      "timeframe": "monthly",
+      "pattern": "Writing style evolution over time",
+      "confidence": 75,
+      "styleEvolution": [
+        {
+          "period": "2024-08",
+          "characteristics": ["Formality: 35%", "Enthusiasm: 60%", "Avg sentence length: 14.2 words", "Emoji usage: 3 emojis"],
+          "changes": ["Initial period - more formal approach"]
+        },
+        {
+          "period": "2024-09",
+          "characteristics": ["Formality: 28%", "Enthusiasm: 65%", "Avg sentence length: 13.1 words", "Emoji usage: 5 emojis"],
+          "changes": ["Becoming more casual, increased emoji usage"]
+        },
+        {
+          "period": "2024-10",
+          "characteristics": ["Formality: 25%", "Enthusiasm: 68%", "Avg sentence length: 12.4 words", "Emoji usage: 8 emojis"],
+          "changes": ["Settled into consistent casual, friendly tone"]
+        }
+      ]
+    }
+  ],
+  "trainingRecommendations": [
+    {
+      "category": "voice",
+      "priority": "high",
+      "promptGuidance": "Use Australian English spelling and incorporate casual Australian expressions when appropriate. The user prefers a mate-like, approachable tone that sounds like a real local tradie talking to neighbours.",
+      "examplePrompts": [
+        "Write like a friendly Melbourne plumber talking to a neighbour",
+        "Use Australian spelling (colour, centre, realise) and expressions like 'no worries', 'fair dinkum', 'give us a bell'"
+      ],
+      "emphasise": ["Australian spelling", "Local expressions", "Casual mate-like tone", "Community connection"],
+      "avoid": ["American spelling", "Corporate jargon", "Overly formal language", "Generic business speak"],
+      "expectedOutcome": "Content that sounds authentically Australian and matches the user's natural tradie communication style"
+    },
+    {
+      "category": "vocabulary",
+      "priority": "high",
+      "promptGuidance": "Use simple, everyday language that working-class Australians understand. Avoid corporate jargon and complex terminology in favour of direct, practical communication.",
+      "examplePrompts": [
+        "Write in simple, practical language like a tradie explaining work to a customer",
+        "Use words like 'help' instead of 'facilitate', 'use' instead of 'utilize'"
+      ],
+      "emphasise": ["Simple language", "Practical terms", "Direct communication", "Working-class vocabulary"],
+      "avoid": ["Corporate buzzwords", "Complex terminology", "Pretentious language", "Academic jargon"],
+      "expectedOutcome": "Content that feels natural and accessible to the target blue-collar Australian audience"
+    },
+    {
+      "category": "platform-adaptation",
+      "priority": "medium",
+      "promptGuidance": "Optimise content for Facebook primarily, as this user posts most frequently there. Adapt slightly for Instagram with more visual focus and hashtags.",
+      "examplePrompts": [
+        "Write Facebook content with community focus and longer explanations",
+        "Adapt for Instagram with visual emphasis and more hashtags"
+      ],
+      "emphasise": ["Facebook community engagement", "Local area targeting", "Visual content for Instagram"],
+      "avoid": ["One-size-fits-all content", "Platform-inappropriate length", "Generic social media approach"],
+      "expectedOutcome": "Platform-specific content that performs better on the user's primary channels"
+    }
+  ]
+}

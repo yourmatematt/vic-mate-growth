@@ -8,10 +8,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { User, Lock, Bell, Shield } from 'lucide-react';
+import { User, Lock, Bell, Shield, CreditCard } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import BillingSettings from './settings/BillingSettings';
 
-const Settings = () => {
+interface SettingsProps {
+  defaultTab?: string;
+}
+
+const Settings: React.FC<SettingsProps> = ({ defaultTab = 'profile' }) => {
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -44,11 +49,15 @@ const Settings = () => {
         </p>
       </div>
 
-      <Tabs defaultValue="profile" className="space-y-6">
-        <TabsList>
+      <Tabs defaultValue={defaultTab} className="space-y-6">
+        <TabsList className="flex-wrap h-auto">
           <TabsTrigger value="profile">
             <User className="h-4 w-4 mr-2" />
             Profile
+          </TabsTrigger>
+          <TabsTrigger value="billing">
+            <CreditCard className="h-4 w-4 mr-2" />
+            Billing
           </TabsTrigger>
           <TabsTrigger value="security">
             <Lock className="h-4 w-4 mr-2" />
@@ -141,6 +150,11 @@ const Settings = () => {
               </Button>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        {/* Billing Tab */}
+        <TabsContent value="billing">
+          <BillingSettings />
         </TabsContent>
 
         {/* Security Tab */}
