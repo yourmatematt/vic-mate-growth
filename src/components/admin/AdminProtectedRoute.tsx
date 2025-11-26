@@ -21,8 +21,21 @@ interface AuthState {
 const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) => {
   // TODO: Replace with actual AuthContext hook
   // This is a mock implementation - replace with your actual auth system
+
+  // Simulate loading state - moved hooks to top level
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Simulate auth check
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Mock auth state - replace this with actual auth context
   const authState: AuthState = React.useMemo(() => {
-    // Mock auth state - replace this with actual auth context
     const mockUser: AuthUser = {
       id: 'admin-1',
       email: 'admin@yourmate.com.au',
@@ -30,23 +43,11 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
       isAuthenticated: true
     };
 
-    // Simulate loading state
-    const [loading, setLoading] = React.useState(true);
-
-    React.useEffect(() => {
-      // Simulate auth check
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-
-      return () => clearTimeout(timer);
-    }, []);
-
     return {
       user: mockUser,
       loading
     };
-  }, []);
+  }, [loading]);
 
   // Show loading spinner while checking authentication
   if (authState.loading) {
