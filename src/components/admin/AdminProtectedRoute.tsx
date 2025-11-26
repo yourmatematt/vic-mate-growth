@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { getCurrentUser, onAuthStateChange, UserWithProfile } from '@/lib/auth-utils';
+import AdminLogin from '@/pages/admin/AdminLogin';
 
 interface AdminProtectedRouteProps {
   children: React.ReactNode;
@@ -73,9 +74,9 @@ const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ children }) =
     );
   }
 
-  // Redirect to login if not authenticated
+  // Show admin login if not authenticated
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <AdminLogin onSuccess={() => window.location.reload()} />;
   }
 
   // Check if user has admin role

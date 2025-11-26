@@ -284,11 +284,20 @@ const App = () => (
 
               {/* Admin Routes */}
               <Route path="/admin/unauthorized" element={<AdminUnauthorized />} />
+
+              {/* Admin Dashboard - redirect /admin to /admin/dashboard */}
               <Route path="/admin" element={
                 <AdminProtectedRoute>
                   <AdminDashboard />
                 </AdminProtectedRoute>
               } />
+              <Route path="/admin/dashboard" element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              } />
+
+              {/* Admin Settings */}
               <Route path="/admin/settings" element={
                 <AdminProtectedRoute>
                   <AdminSettings />
