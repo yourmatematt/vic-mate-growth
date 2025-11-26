@@ -89,34 +89,39 @@ class GoogleCalendarService {
   }
 
   /**
-   * Handle OAuth callback and exchange code for tokens
+   * Handle OAuth callback and exchange code for tokens via Edge Function
    */
   async handleOAuthCallback(code: string): Promise<GoogleAuthTokens> {
     try {
-      const tokenResponse = await fetch(GOOGLE_CALENDAR_CONSTANTS.TOKEN_URL, {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      if (!supabaseUrl) {
+        throw new CalendarError(
+          'Supabase URL not configured',
+          CalendarErrorType.CONFIGURATION_ERROR
+        );
+      }
+
+      const tokenResponse = await fetch(`${supabaseUrl}/functions/v1/google-oauth-callback`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
-        body: new URLSearchParams({
-          client_id: config.clientId,
-          client_secret: config.clientSecret,
+        body: JSON.stringify({
+          code,
           redirect_uri: config.redirectUri,
-          grant_type: 'authorization_code',
-          code
-        }).toString()
+        }),
       });
 
-      if (!tokenResponse.ok) {
-        const errorData = await tokenResponse.json();
+      const tokenData = await tokenResponse.json();
+
+      if (!tokenResponse.ok || tokenData.error) {
         throw new CalendarError(
-          `OAuth token exchange failed: ${errorData.error_description || errorData.error}`,
+          `OAuth token exchange failed: ${tokenData.error || 'Unknown error'}`,
           CalendarErrorType.INVALID_TOKEN,
           tokenResponse.status
         );
       }
-
-      const tokenData: GoogleOAuthTokenResponse = await tokenResponse.json();
 
       if (!tokenData.refresh_token) {
         throw new CalendarError(
@@ -131,10 +136,8 @@ class GoogleCalendarService {
         expiry_date: Date.now() + (tokenData.expires_in * 1000)
       };
 
-      // Store tokens in database
       await this.storeTokens(tokens);
 
-      // Update instance variables
       this.accessToken = tokens.access_token;
       this.refreshToken = tokens.refresh_token;
       this.tokenExpiry = new Date(tokens.expiry_date);
