@@ -54,7 +54,7 @@ const GoogleCalendarAuth: React.FC = () => {
     if (error) {
       toast.error(`OAuth error: ${error}`);
       // Clear URL parameters
-      navigate('/admin/google-calendar', { replace: true });
+      navigate('/admin/google-calendar-auth', { replace: true });
       return;
     }
 
@@ -109,7 +109,7 @@ const GoogleCalendarAuth: React.FC = () => {
       toast.success('Google Calendar connected successfully!');
 
       // Clear URL parameters
-      navigate('/admin/google-calendar', { replace: true });
+      navigate('/admin/google-calendar-auth', { replace: true });
 
       // Reload connection status
       await loadConnectionStatus();
@@ -457,7 +457,7 @@ const GoogleCalendarAuth: React.FC = () => {
                 <li>
                   Add authorized redirect URI:{' '}
                   <code className="bg-gray-100 px-1 py-0.5 rounded text-xs">
-                    {window.location.origin}/admin/google-calendar
+                    {window.location.origin}/admin/google-calendar-auth/callback
                   </code>
                 </li>
                 <li>Add your credentials to environment variables</li>
